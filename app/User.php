@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return the Avatars Collection
+     */
+    public function avatars(){
+        return $this->hasMany('App\Avatar');
+    }
 }
