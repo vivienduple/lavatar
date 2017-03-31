@@ -25,18 +25,29 @@ class UserController extends Controller
         return view('userAccount', ['avatars' => $this->avatars]);
     }
 
+    /*method that display the new avatar creation form*/
     public function displayAvatarCreationForm(){
 
-        return 'Formulaire de creation d"un avatar';
+        return view('avatarCreationForm');
     }
 
-    public function createNewAvatar(){
+    /*method that create a new avatar (email/image) on form submission*/
+    public function createNewAvatar(Request $request){
 
-        return view('userAccount', ['avatars' => $this->avatars]);
+        $dataFromForm = $request->all();
+        $validator = Validator::make($dataFromForm, ['email' => 'required | email',
+            'file'  => 'required | image | dimensions:min_width=128,min_height=128,max_width=256,max_height=256']);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+
+        return "je viens de creer un nouvel avatar avec mon formulaire";
     }
 
     public function deleteAvatar(){
 
-        return view('userAccount', ['avatars' => $this->avatars]);
+        return ""/*view('userAccount', ['avatars' => $this->avatars])*/;
     }
 }

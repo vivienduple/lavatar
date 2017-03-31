@@ -18,11 +18,13 @@ Route::get('/', function () {
 /* router to user {id} home page*/
 Route::get('/user/dashboard')
     ->name('user.dashboard')
+    ->middleware('auth')
     ->uses('UserController@displayUserHomePage');
 
 /* router to the avatar creation form*/
 Route::get('/addAvatar')
     ->name('addAvatar')
+    //->middleware('auth')
     ->uses('UserController@displayAvatarCreationForm');
 
 /* router to the process of avatar creation form*/
