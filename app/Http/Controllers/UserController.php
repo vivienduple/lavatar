@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Avatar;
 use Illuminate\Http\Request;
 use Debugbar;
 use Validator;
