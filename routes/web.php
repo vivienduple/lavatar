@@ -15,28 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* router to the sign-in form*/
-Route::get('/login')
-    ->name('login')
-    ->uses('Auth//LoginController@displayLoginForm');
-
-/* router to the process of the sign-in form*/
-Route::post('/login')
-    ->name('signIn');
-
-/* router to the sign-up form*/
-Route::get('/register')
-    ->name('register')
-    ->uses('Auth//RegisterController@displayRegisterForm');
-
-/* router to the process of the sign-up form*/
-Route::post('/register')
-    ->name('signUp');
-
 /* router to user {id} home page*/
-Route::get('/user/{id}')
-    ->name('user')
-    ->where('id','[0-9]+')
+Route::get('/user/dashboard')
+    ->name('user.dashboard')
     ->uses('UserController@displayUserHomePage');
 
 /* router to the avatar creation form*/

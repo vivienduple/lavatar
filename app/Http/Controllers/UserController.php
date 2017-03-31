@@ -15,9 +15,14 @@ use Validator;
 
 class UserController extends Controller
 {
+    /* list of the avatars related to the user account*/
+    private  $avatars;
+
+    /*method that display the dashboard of the logged user*/
     public function displayUserHomePage($id){
 
-        return view('userAccount');
+        $this->avatars = User::find(Auth::id)->avatars();
+        return view('userAccount', ['avatars' => $this->avatars]);
     }
 
     public function displayAvatarCreationForm(){
@@ -27,11 +32,11 @@ class UserController extends Controller
 
     public function createNewAvatar(){
 
-        return 'Creation de l"avatar';
+        return view('userAccount', ['avatars' => $this->avatars]);
     }
 
     public function deleteAvatar(){
 
-        return 'Suppression de l"avatar';
+        return view('userAccount', ['avatars' => $this->avatars]);
     }
 }
