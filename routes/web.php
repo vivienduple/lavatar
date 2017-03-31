@@ -15,6 +15,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function(){
-    return 'It works';
-});
+/* router to user {id} home page*/
+Route::get('/user/dashboard')
+    ->name('user.dashboard')
+    ->uses('UserController@displayUserHomePage');
+
+/* router to the avatar creation form*/
+Route::get('/addAvatar')
+    ->name('addAvatar')
+    ->uses('UserController@displayAvatarCreationForm');
+
+/* router to the process of avatar creation form*/
+Route::post('/addAvatar')
+    ->name('addAvatar.process')
+    ->uses('UserController@createNewAvatar');
+
+/* router to the process of avatar deletion*/
+Route::post('/removeAvatar')
+    ->name('removeAvatar.process')
+    ->uses('UserController@deleteAvatar');
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
