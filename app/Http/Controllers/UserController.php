@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Avatar;
 use Illuminate\Http\Request;
 use Debugbar;
 use Validator;
@@ -26,8 +28,7 @@ class UserController extends Controller
     }
 
     public function displayAvatarCreationForm(){
-
-        return 'Formulaire de creation d"un avatar';
+            return 'Formulaire de creation d"un avatar';
     }
 
     public function createNewAvatar(){
