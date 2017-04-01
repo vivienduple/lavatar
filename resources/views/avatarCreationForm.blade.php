@@ -10,7 +10,6 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('addAvatar') }}" accept="image/*" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">Votre adresse e-mail</label>
 
@@ -25,12 +24,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group{{ (isset($msg) && $msg=='invalid format') ? ' has-error' : '' }}">
                                 <label for="inputFile" class="col-md-4 control-label">Votre image d'avatar</label>
                                 <div class="col-md-6">
                                     <input type="file" id="exampleInputFile" class="form-control" name="file" aria-describedby="helpBlock" required>
                                     <span id="helpBlock" class="help-block">Taille mini: 128px / Taille max: 256 px</span>
-                                    <span id="helpBlock" class="help-block">Formats image: jpeg, png, bmp, gif, or svg</span>
+                                    <span id="helpBlock" class="help-block">Formats image: jpeg, png</span>
                                 </div>
                             </div>
 

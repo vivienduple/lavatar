@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-{{"coucou"}}
+{{"coucou user dashbord"}}
 @endsection
