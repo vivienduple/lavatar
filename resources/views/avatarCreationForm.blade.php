@@ -10,7 +10,7 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('addAvatar') }}" accept="image/*" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ ($errors->has('email') || (isset($msg) && $msg=='email already used')) ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">Votre adresse e-mail</label>
 
                                 <div class="col-md-6">
@@ -19,6 +19,11 @@
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                    @if (isset($msg) && $msg=='email already used')
+                                        <span class="help-block">
+                                        <strong>{{ $msg }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -30,6 +35,11 @@
                                     <input type="file" id="exampleInputFile" class="form-control" name="file" aria-describedby="helpBlock" required>
                                     <span id="helpBlock" class="help-block">Taille mini: 128px / Taille max: 256 px</span>
                                     <span id="helpBlock" class="help-block">Formats image: jpeg, png</span>
+                                    @if (isset($msg) && $msg=='invalid format')
+                                        <span class="help-block">
+                                        <strong>{{ $msg }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 

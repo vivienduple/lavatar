@@ -24,7 +24,7 @@ Route::get('/user/dashboard')
 /* router to the avatar creation form*/
 Route::get('/addAvatar')
     ->name('addAvatar')
-    //->middleware('auth')
+    ->middleware('auth')
     ->uses('UserController@displayAvatarCreationForm');
 
 /* router to the process of avatar creation form*/
