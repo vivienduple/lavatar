@@ -101,7 +101,7 @@ class UserController extends Controller
 
             // creation of image files associated to the avatar
             // the image is stored in the directory below
-            $dossier = '/users/web/infol/jthebault001/WWW/lavatar-2/storage/app/public/images/';
+            $dossier = config('lavatar.avatarStorageDir');
             $tmpFileName = $_FILES['file']['tmp_name'];
 
             if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'pjpg' || $extension == 'pjpeg' || $extension == 'png'){
@@ -142,10 +142,22 @@ class UserController extends Controller
 
 
 
-    public function deleteAvatar(){
+    public function deleteAvatar($id){
+        
+
+        // remove the images associated to the avatar
+        $avatarToDelete = Avatar::find($id);
+        $avatarImgBaseName = $avatarToDelete->image;
+        $dossier = config('lavatar.avatarStorageDir');
+        unlink($dossier."128_".$avatarImgBaseName);
+        unlink($dossier."256_".$avatarImgBaseName);
+
+        // remove the avatar in DB
+        $avatarToDelete->delete();
 
         // return to the updated user dashboard
-        //return view('userAccount', ['avatars' => $this->avatars]);
+        $this->avatars = User::find(Auth::id())->avatars();
+        return view('userAccount', ['avatars' => $this->avatars]);
     }
 
     public function displayRegistrationAvatarConfirmation(){

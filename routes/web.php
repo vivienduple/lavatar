@@ -39,8 +39,9 @@ Route::post('/addAvatar')
     ->uses('UserController@createNewAvatar');
 
 /* router to the process of avatar deletion*/
-Route::post('/removeAvatar')
+Route::get('/removeAvatar/{id}')
     ->name('removeAvatar.process')
+    ->middleware('auth')
     ->uses('UserController@deleteAvatar');
 
 /* router to possibiity of adding an avatar to a new created account*/
