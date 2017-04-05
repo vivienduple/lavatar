@@ -14,7 +14,11 @@
                                 <label for="email" class="col-md-4 control-label">Votre adresse e-mail</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{isset($email)?$email: old('email') }}" required autofocus disabled="{{isset($email)?'disabled':''}}">
+                                    @if (isset($email))
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ $email }}" required autofocus disabled>
+                                    @else
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                    @endif
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
