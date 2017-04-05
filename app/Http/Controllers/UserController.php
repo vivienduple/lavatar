@@ -8,7 +8,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationMailConf;
 use App\User;
 use App\Avatar;
 use Illuminate\Http\Request;
@@ -80,13 +81,23 @@ class UserController extends Controller
         if ($validator->fails()){
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
+
+        $userWithEmail = User::where('email','like',$dataFromForm['email'])->get();
+        if (count($userWithEmail) != 0){
+            // a user has used this email to create his account
+            // continue only if the currect connected user is the owner of this account
+            // as email is unique in the table User, there is only 1 entry
+            foreach ($userWithEmail as $m)
+                if ($m->id != $userId){
+                    return view('avatarCreationForm', ['msg' => 'email interdit']);
+                }
+        }
         
         // check the email is not already present in the DB
         $avatarWithMail = Avatar::where('email','like',$dataFromForm['email'])->get();
-
         if (count($avatarWithMail)!=0){
-            //pb: an avatar with with email is already present in DB for this user
-            return view('avatarCreationForm', ['msg' => 'an avatar with this email already exists']);
+            //pb: an avatar with with email is already present in DB Avatars table
+            return view('avatarCreationForm', ['msg' => 'email interdit']);
         }
         else{
             // check of the extension format jpg or png
@@ -134,7 +145,7 @@ class UserController extends Controller
                 return redirect()->route('user.dashboard');
             }
             else{
-                return view('avatarCreationForm', ['msg' => 'invalid format']);
+                return view('avatarCreationForm', ['msg' => 'format invalide']);
             }
         }
 
@@ -159,8 +170,10 @@ class UserController extends Controller
         return redirect()->route('user.dashboard');
     }
 
-    public function displayRegistrationAvatarConfirmation(){
+    public function displayRegistrationAvatarConfirmation(Request $request){
 
+        $user = User::find(Auth::id());
+        Mail::to($user->email)->send(new RegistrationMailConf());
         // return to the updated user dashboard
         return view('addAvatarImageOnRegistration');
     }

@@ -35,7 +35,7 @@
                                                 <div class="list-group-item default">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <img src="@php echo config('lavatar.avatarStorageURL').'128_'.$avatar->image @endphp" alt="{{ 'un avatar' }}"></img>
+                                                            <img src="@php echo config('lavatar.avatarStorageURL').'128_'.$avatar->image @endphp" alt="{{ 'un avatar' }}"/>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <p class="list-group-item-text">{{ $avatar->email }}</p>
@@ -54,9 +54,10 @@
                             </div>
                         </div>
                     </div>
-                <div class="panel-footer">LP Multimédia - Benjamin Abadie, Julie Thébaut, Vivien Duplé - Iut de Bayonne et du Pays Basque</div>
+                <div class="panel-footer">LP Multimédia - Benjamin Abadie, Julie Thébault, Vivien Duplé - Iut de Bayonne et du Pays Basque</div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
