@@ -75,7 +75,7 @@ class RegisterController extends Controller
 
     public function redirectTo()
     {
-        return route('registration.avatar');
+        return redirect()->route('registration.avatar');
     }
 
 }

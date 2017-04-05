@@ -50,8 +50,6 @@ Route::get('/regAvatar')
     ->uses('UserController@displayRegistrationAvatarConfirmation');
 
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

@@ -41,6 +41,32 @@ class UserController extends Controller
         return view('avatarCreationForm',['email' => $user->email]);
     }
 
+    public function createAvatarImage($extension,$savedFileName,$newWidth,$newHeight,$refImageSize,$userId,$baseFileName,$dossier){
+        $avatarImageName='';
+        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'pjpg' || $extension == 'pjpeg' ) {
+
+            // transform the image at exoected formats
+            $refImage = imagecreatefromjpeg($savedFileName);
+            $newImage = imagecreatetruecolor($newWidth, $newHeight) or die ("Erreur");
+            imagecopyresampled($newImage, $refImage, 0, 0, 0, 0, $newWidth, $newWidth, $refImageSize[0], $refImageSize[1]);
+            imagedestroy($refImage);
+
+            $avatarImageName = $newWidth.'_'.time($baseFileName) . '.' . $extension;
+            imagejpeg($newImage, $dossier . $avatarImageName, 100);
+        }
+        else{//$extension == 'png'
+            $refImage = imagecreatefrompng($savedFileName);
+            $newImage = imagecreatetruecolor($newWidth, $newHeight) or die ("Erreur");
+            imagecopyresampled($newImage, $refImage, 0, 0, 0, 0, $newWidth, $newWidth, $refImageSize[0], $refImageSize[1]);
+            imagedestroy($refImage);
+
+            $avatarImageName = $newWidth.'_'.time($baseFileName) . '.' . $extension;
+            imagepng($newImage, $dossier . $avatarImageName);
+
+        }
+        return $avatarImageName;
+    }
+
     /*method that create a new avatar (email/image) on form submission*/
     public function createNewAvatar(Request $request){
 
@@ -59,14 +85,14 @@ class UserController extends Controller
         $avatarWithMail = Avatar::where('email','like',$dataFromForm['email'])->get();
 
         if (count($avatarWithMail)!=0){
-            echo "test1";
             //pb: an avatar with with email is already present in DB for this user
             return view('avatarCreationForm', ['msg' => 'an avatar with this email already exists']);
         }
         else{
             // check of the extension format jpg or png
             $fileComponents = explode('.', $_FILES['file']['name']);
-            $extension = strtolower($fileComponents[count($fileComponents)-1]);
+            $origExtension = $fileComponents[count($fileComponents)-1];
+            $extension = strtolower($origExtension);
 
             $fileName = basename($_FILES['file']['name']);
             $pos = strripos($fileName , '.');
@@ -84,58 +110,37 @@ class UserController extends Controller
                 move_uploaded_file($tmpFileName, $savedFileName);
 
                 $refImageSize = getimagesize($savedFileName);
-                $newWidth= 128;
-                $newHeight= 128;
-                $reduction = ( ($newWidth * 100)/$refImageSize[0] );
 
-                $avatarImageName = '';
+                $avatarName = '';
 
+                // create the 128x128 avatar image
+                $avatarName128 = $this->createAvatarImage($extension,$savedFileName,128,128,$refImageSize,$userId,$baseFileName,$dossier);
+                // create the 256x256 avatar image
+                $avatarName256 = $this->createAvatarImage($extension,$savedFileName,256,256,$refImageSize,$userId,$baseFileName,$dossier);
 
+                unlink($savedFileName);
 
-                if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'pjpg' || $extension == 'pjpeg' ) {
+                $avatarName = substr($avatarName128, 4 );
 
-                    // transformer la photo au bon format
-                    $refImage = imagecreatefromjpeg($savedFileName);
-                    $newImage = imagecreatetruecolor($newWidth, $newHeight) or die ("Erreur");
-                    imagecopyresampled($newImage, $refImage, 0, 0, 0, 0, $newWidth, $newWidth, $refImageSize[0], $refImageSize[1]);
-                    imagedestroy($refImage);
-                    //TODO
-                    // mettre le bon nom de fichier
-                    $avatarImageName = $userId.'_'.time($baseFileName) . '.' . $extension;
-                    imagejpeg($newImage, $dossier . $avatarImageName, 100);
-                }
-                else{//$extension == 'png'
-                    $refImage = imagecreatefrompng($savedFileName);
-                    $newImage = imagecreatetruecolor($newWidth, $newHeight) or die ("Erreur");
-                    imagecopyresampled($newImage, $refImage, 0, 0, 0, 0, $newWidth, $newWidth, $refImageSize[0], $refImageSize[1]);
-                    imagedestroy($refImage);
-
-                    $avatarImageName = $userId.'_'.time($baseFileName) . '.' . $extension;
-                    imagepng($newImage, $dossier . $avatarImageName);
-
-                }
-                echo "test3";
                 // creation of the avatar in DB
                 $avatar = new Avatar();
                 $avatar->user_id = $userId;
                 $avatar->email = $dataFromForm['email'];
-                $avatar->image = $avatarImageName;
+                $avatar->image = $avatarName;
                 $avatar->save();
-
-
+                
                 //return "je viens de creer un nouvel avatar avec mon formulaire dt le nom de l'image est: ".$avatar->image;
                 // return to the updated user dashboard
-                return route('user.dashboard');
+                return redirect()->route('user.dashboard');
             }
             else{
                 return view('avatarCreationForm', ['msg' => 'invalid format']);
             }
         }
 
-
- 
-        
     }
+
+
 
     public function deleteAvatar(){
 
