@@ -18,12 +18,12 @@
                                     @else
                                         @foreach ($avatars as $avatar)
                                             <div class="list-group">
-                                                <form class="form-horizontal" role="form" method="GET" action="@php route('removeAvatar.process').$avatar->id @endphp">
+                                                <form class="form-horizontal" role="form" method="GET" action="@php echo route('removeAvatar.process', [$avatar->id]) @endphp">
                                                     {{ csrf_field() }}
-                                                <a href="#" class="list-group-item default">
+                                                <div class="list-group-item default">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <img src="@php echo substr(url('/'), 0, strlen(url('/'))-7).'/storage/app/public/images'.$avatar->image @endphp"></img>
+                                                            <img src="@php echo config('lavatar.avatarStorageURL').'128_'.$avatar->image @endphp" alt="{{ 'un avatar' }}"></img>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <p class="list-group-item-text">{{ $avatar->email }}</p>
@@ -34,7 +34,7 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </div>
                                                 </form>
                                             </div>
                                         @endforeach

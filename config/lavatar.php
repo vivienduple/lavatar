@@ -4,14 +4,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
+    | Avatar Storage URL
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
+    | This value is the URL of the Avatar directory.
     */
 
-    'avatarStorageDir' => '/users/web/infol/jthebault001/WWW/lavatar-2/storage/app/public/images/',
+    'avatarStorageURL' => substr(url('/'), 0, strlen(url('/'))-7).'/storage/app/public/images/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Avatar Storage Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path of the Avatar directory.
+    */
+    'avatarStoragePath' => storage_path().'/app/public/images/',
     
 ];
