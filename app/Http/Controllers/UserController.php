@@ -24,9 +24,8 @@ class UserController extends Controller
     /*method that display the dashboard of the logged user*/
     public function displayUserHomePage(){
 
-        /*$this->avatars = User::find(Auth::id)->avatars();
-        return view('userAccount', ['avatars' => $this->avatars]);*/
-        return view('userAccount');
+        $this->avatars = User::find(Auth::id())->avatars();
+        return view('userAccount', ['avatars' => $this->avatars]);
     }
 
     /*method that display the new avatar creation form*/
