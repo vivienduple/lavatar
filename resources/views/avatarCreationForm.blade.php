@@ -26,7 +26,7 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
-                                    @if (isset($msg) && $msg=='email already used')
+                                    @if (isset($msg) && $msg=='an avatar with this email already exists')
                                         <span class="help-block">
                                         <strong>{{ $msg }}</strong>
                                     </span>

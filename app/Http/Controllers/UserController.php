@@ -60,6 +60,7 @@ class UserController extends Controller
         $avatarWithMail = Avatar::where('email','like',$dataFromForm['email'])->get();
 
         if (count($avatarWithMail)!=0){
+            echo "test1";
             //pb: an avatar with with email is already present in DB for this user
             return view('avatarCreationForm', ['msg' => 'an avatar with this email already exists']);
         }
