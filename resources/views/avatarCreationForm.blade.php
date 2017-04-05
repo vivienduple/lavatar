@@ -15,7 +15,8 @@
 
                                 <div class="col-md-6">
                                     @if (isset($email))
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ $email }}" required autofocus disabled>
+                                        <input type="email" class="form-control" value="{{ $email }}" disabled>
+                                        <input id="email" type="hidden" class="form-control" name="email" value="{{ $email }}" >
                                     @else
                                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                                     @endif

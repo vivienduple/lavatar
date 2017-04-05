@@ -57,7 +57,7 @@ class UserController extends Controller
         }
         
         // check the email is not already present in the DB
-        $avatarWithMail = Avatar::where('email','=',$dataFromForm['email']);
+        $avatarWithMail = Avatar::where('email','like',$dataFromForm['email'])->get();
 
         if (count($avatarWithMail)!=0){
             //pb: an avatar with with email is already present in DB for this user
@@ -114,7 +114,7 @@ class UserController extends Controller
                     imagepng($newImage, $dossier . $avatarImageName);
 
                 }
-
+                echo "test3";
                 // creation of the avatar in DB
                 $avatar = new Avatar();
                 $avatar->user_id = $userId;
@@ -123,9 +123,9 @@ class UserController extends Controller
                 $avatar->save();
 
 
-                return "je viens de creer un nouvel avatar avec mon formulaire dt le nom de l'image est: ".$avatar->image;
+                //return "je viens de creer un nouvel avatar avec mon formulaire dt le nom de l'image est: ".$avatar->image;
                 // return to the updated user dashboard
-                //return view('userAccount', ['avatars' => $this->avatars]);
+                return route('user.dashboard');
             }
             else{
                 return view('avatarCreationForm', ['msg' => 'invalid format']);
