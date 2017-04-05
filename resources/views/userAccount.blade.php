@@ -11,7 +11,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Vos avatars
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Vos avatars
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="{{ route('addAvatar') }}">
+                                                <button type="submit" class="btn btn-success pull-right">
+                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                                     @if($avatars->isEmpty())
                                         <div class="alert alert-info" role="alert">Aucun avatar disponible pour votre profil</div>
@@ -29,7 +41,7 @@
                                                             <p class="list-group-item-text">{{ $avatar->email }}</p>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <button type="submit" class="btn btn-danger">
+                                                            <button type="submit" class="btn btn-danger pull-right">
                                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                             </button>
                                                         </div>
