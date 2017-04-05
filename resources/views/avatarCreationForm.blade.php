@@ -14,7 +14,7 @@
                                 <label for="email" class="col-md-4 control-label">Votre adresse e-mail</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{isset($email)?$email: old('email') }}" required autofocus disabled="{{isset($email)?'disabled':''}}">
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -48,6 +48,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Créer
                                     </button>
+                                    <a class="btn btn-primary" href="{{ route('user.dashboard') }}" role="button">Annuler</a>
                                 </div>
                             </div>
                         </form>

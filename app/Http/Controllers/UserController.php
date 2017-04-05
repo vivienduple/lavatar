@@ -22,16 +22,24 @@ class UserController extends Controller
     private  $avatars;
 
     /*method that display the dashboard of the logged user*/
-    public function displayUserHomePage($id){
+    public function displayUserHomePage(){
 
-        $this->avatars = User::find(Auth::id)->avatars();
-        return view('userAccount', ['avatars' => $this->avatars]);
+        /*$this->avatars = User::find(Auth::id)->avatars();
+        return view('userAccount', ['avatars' => $this->avatars]);*/
+        return view('userAccount');
     }
 
     /*method that display the new avatar creation form*/
     public function displayAvatarCreationForm(){
 
-        return view('avatarCreationForm');return view('avatarCreationForm', ['msg' => '']);
+        return view('avatarCreationForm');
+    }
+
+    /*method that display the new avatar creation form*/
+    public function displayAvatarCreationFormFromReg(){
+
+        $user=User::find(Auth::Id());
+        return view('avatarCreationForm',['email' => $user->email]);
     }
 
     /*method that create a new avatar (email/image) on form submission*/
@@ -109,12 +117,9 @@ class UserController extends Controller
 
                 // creation of the avatar in DB
                 $avatar = new Avatar();
-                //TODO
-
                 $avatar->user_id = $userId;
                 $avatar->email = $dataFromForm['email'];
                 $avatar->image = $avatarImageName;
-                //TODO
                 $avatar->save();
 
 
@@ -137,4 +142,11 @@ class UserController extends Controller
         // return to the updated user dashboard
         //return view('userAccount', ['avatars' => $this->avatars]);
     }
+
+    public function displayRegistrationAvatarConfirmation(){
+
+        // return to the updated user dashboard
+        return view('addAvatarImageOnRegistration');
+    }
+
 }

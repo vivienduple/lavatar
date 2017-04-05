@@ -27,6 +27,12 @@ Route::get('/addAvatar')
     ->middleware('auth')
     ->uses('UserController@displayAvatarCreationForm');
 
+/* router to the avatar creation form*/
+Route::get('/addAvatarOnReg')
+    ->name('addAvatarOnReg')
+    ->middleware('auth')
+    ->uses('UserController@displayAvatarCreationFormFromReg');
+
 /* router to the process of avatar creation form*/
 Route::post('/addAvatar')
     ->name('addAvatar.process')
@@ -36,6 +42,12 @@ Route::post('/addAvatar')
 Route::post('/removeAvatar')
     ->name('removeAvatar.process')
     ->uses('UserController@deleteAvatar');
+
+/* router to possibiity of adding an avatar to a new created account*/
+Route::get('/regAvatar')
+    ->name('registration.avatar')
+    ->middleware('auth')
+    ->uses('UserController@displayRegistrationAvatarConfirmation');
 
 
 
