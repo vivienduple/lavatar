@@ -1,43 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Panneau de bords</div>
 
                 <div class="panel-body">
-                    @if($avatars != null)
-                        @php
-                            dd($avatars);
-                        @endphp
-                        <div class="alert alert-info" role="alert">Aucun avatar disponible pour votre profil</div>
-                    @else
-                        @foreach ($avatars as $avatar)
-                            @php
-                                dd($avatar);
-                            @endphp
-                        <div class="list-group">
-                            <a href="#" class="list-group-item active">
-                                <div class="col-md-4">
-                                    <p class="list-group-item-text">{{ $avatar }}</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Vos avatars
                                 </div>
-                                <div class="col-md-4">
-                                    <p class="list-group-item-text">{{ $avatar }}</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-default"></button>
-                                    </div>
-                                </div>
-                            </a>
+                                    @if($avatars->isEmpty())
+                                        <div class="alert alert-info" role="alert">Aucun avatar disponible pour votre profil</div>
+                                    @else
+                                        @foreach ($avatars as $avatar)
+                                            <div class="list-group">
+                                                <form class="form-horizontal" role="form" method="GET" action="@php route('removeAvatar.process').$avatar->id @endphp">
+                                                    {{ csrf_field() }}
+                                                <a href="#" class="list-group-item default">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img src="@php echo substr(url('/'), 0, strlen(url('/'))-7).'/storage/app/public/images'.$avatar->image @endphp"></img>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="list-group-item-text">{{ $avatar->email }}</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                </form>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                            </div>
                         </div>
-                        @endforeach
-                    @endif
-                </div>
-
-                <div class="panel-footer">Panel footer</div>
+                    </div>
+                <div class="panel-footer">LP Multimédia - Benjamin Abadie, Julie Thébaut, Vivien Duplé - Iut de Bayonne et du Pays Basque</div>
             </div>
         </div>
     </div>
