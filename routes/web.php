@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* router to user {id} home page*/
+/* router to the logged user dashbord */
 Route::get('/user/dashboard')
     ->name('user.dashboard')
     ->middleware('auth')
@@ -27,13 +27,13 @@ Route::get('/addAvatar')
     ->middleware('auth')
     ->uses('UserController@displayAvatarCreationForm');
 
-/* router to the avatar creation form*/
+/* router to the avatar creation form (after registration)*/
 Route::get('/addAvatarOnReg')
     ->name('addAvatarOnReg')
     ->middleware('auth')
     ->uses('UserController@displayAvatarCreationFormFromReg');
 
-/* router to the process of avatar creation form*/
+/* router to the process of avatar creation*/
 Route::post('/addAvatar')
     ->name('addAvatar.process')
     ->uses('UserController@createNewAvatar');
@@ -44,7 +44,7 @@ Route::get('/removeAvatar/{id}')
     ->middleware('auth')
     ->uses('UserController@deleteAvatar');
 
-/* router to possibiity of adding an avatar to a new created account*/
+/* router to possibility of adding an avatar to a new created account*/
 Route::get('/regAvatar')
     ->name('registration.avatar')
     ->middleware('auth')

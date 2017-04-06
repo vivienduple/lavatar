@@ -75,6 +75,7 @@ class RegisterController extends Controller
 
     public function redirectTo()
     {
+        // after user registration, the user is proposed to create the avatar associated to his new account
         return route('registration.avatar');
     }
 

@@ -14,8 +14,10 @@
                             <div class="col-lg-4 col-lg-offset-4">
                                 <div class="form-group">
                                     <!--<input class="btn btn-default active btn-success" type="submit" value="Oui">-->
-                                    <a class="btn btn-primary" href="{{ route('addAvatarOnReg') }}" role="button">{{ __('messages.yes') }}</a>
-                                    <a class="btn btn-primary" href="{{ route('user.dashboard') }}" role="button">{{ __('messages.nothanks') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('addAvatarOnReg') }}"
+                                       role="button">{{ __('messages.yes') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('user.dashboard') }}"
+                                       role="button">{{ __('messages.nothanks') }}</a>
                                 </div>
                             </div>
                         </form>
