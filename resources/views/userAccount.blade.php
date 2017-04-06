@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
-                <div class="panel-heading">Panneau de bords</div>
+                <div class="panel-heading">{{ __('messages.dashboard') }}</div>
 
                 <div class="panel-body">
                     <div class="row">
@@ -14,7 +14,7 @@
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Vos avatars
+                                            {{ __('messages.yoursavatars') }}
                                         </div>
                                         <div class="col-md-6">
                                             <form action="{{ route('addAvatar') }}">
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                     @if($avatars->isEmpty())
-                                        <div class="alert alert-info" role="alert">Aucun avatar disponible pour votre profil</div>
+                                        <div class="alert alert-info" role="alert">{{ __('messages.noavatar') }}</div>
                                     @else
                                         @foreach ($avatars as $avatar)
                                             <div class="list-group">
@@ -35,7 +35,7 @@
                                                 <div class="list-group-item default">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <img src="@php echo config('lavatar.avatarStorageURL').'128_'.$avatar->image @endphp" alt="{{ 'un avatar' }}"></img>
+                                                            <img src="@php echo config('lavatar.avatarStorageURL').'128_'.$avatar->image @endphp" alt="{{ 'avatar' }}"></img>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <p class="list-group-item-text">{{ $avatar->email }}</p>
