@@ -33,5 +33,9 @@ return [
     'cancel' => 'Annuler',
     'dashboard' => 'Tableau de bord',
     'belogout' => 'Se déconnecter',
+    'resetpassword' => 'Réinitialiser votre mot de passe',
+    'sendresetpasswordmail' => 'Envoyer le mail de réinitialisation',
+    
+    
 
 ];

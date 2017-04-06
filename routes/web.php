@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 /* router to the logged user dashbord */
@@ -52,5 +52,3 @@ Route::get('/regAvatar')
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
