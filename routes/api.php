@@ -19,15 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 /* api to get data about provided avatar images*/
-Route::get('infos')
+/*Route::get('infos')
     ->name('api.infos')
-    ->uses('ApiController@provideAvatarInfos');
+    ->uses('ApiController@provideAvatarInfos');*/
 
 /* api to get avatar*/
 Route::get('avatar/{email}/{size?}')
     ->name('api.avatar')
     ->where('size','[1,2]{1}')
     ->uses('ApiController@provideAvatarFromEmail');
+
+/* api to get avatar*/
+Route::get('request/avatar/{email}/{size?}')
+    ->name('api.request.avatar')
+    ->where('size','[1,2]{1}')
+    ->uses('ApiController@provideAvatarInfos');
 
 
 
