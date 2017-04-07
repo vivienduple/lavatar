@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})
+    ->middleware('guest');
 
 /* router to the logged user dashbord */
 Route::get('/user/dashboard')
