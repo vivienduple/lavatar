@@ -12,7 +12,7 @@
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ /~vduple/lavatar3/public/index.php [L]
+    RewriteRule ^ /~jthebault001/lavatar-2/public/index.php [L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
