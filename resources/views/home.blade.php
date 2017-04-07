@@ -14,7 +14,7 @@
             <a type="button" class="btn btn-lg btn-default" href="{{ url('/register') }}">S'enregistrer</a>
         </div>
         <footer class="footer">
-            <p>&copy; 2017  larval commpany, Inc.</p>
+            <p>&copy; 2017 Lavatar.com</p>
         </footer>
     </div>
 </div>

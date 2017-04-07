@@ -35,7 +35,7 @@ return [
     'belogout' => 'Se déconnecter',
     'resetpassword' => 'Réinitialiser votre mot de passe',
     'sendresetpasswordmail' => 'Envoyer le mail de réinitialisation',
-    
+    'dashboard' => 'Tableau de bords',
     
 
 ];
