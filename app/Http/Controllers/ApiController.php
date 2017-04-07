@@ -26,7 +26,7 @@ class ApiController extends Controller
         $avatarWithMail = Avatar::where('email', 'like', $email)->first();
 
         // if there is no avatar associated to the given email, return "error"
-        if (is_null($avatarWithMail)) {
+        if (is_null($avatarWithMail) || !is_null($avatarWithMail->validity)) {
             $error = 1;
             return response()->json(['error' => '1', "mail" => "", "size" => ""]);
         } // an avatar exists for the given email, return data about the avatar
@@ -55,8 +55,8 @@ class ApiController extends Controller
         // get the path of the directory containing the avatars
         $dossier = config('lavatar.avatarStoragePath');
         
-        // if there is no avatar associated to the given email, retunn "404 eroor' image
-        if (is_null($avatarWithMail)) {
+        // if there is no avatar associated to the given email, retunn "404 error' image
+        if (is_null($avatarWithMail) || !is_null($avatarWithMail->validity)) {
             return response()->download($dossier . "error404.jpg");
         } 
         // else, return the avatr in the requested format
@@ -78,5 +78,14 @@ class ApiController extends Controller
 
     }
 
+    /*
+  * this method returns through the API, the data about the application through a JSON file
+ */
+    public function provideAppData()
+    {
+        return response()->json(['App Version' => '1.0',
+            "Authorized Format" => "png, jpeg", "Sizes" => "128x128 256x256",
+            "DefaultSize" => "128x128"]);
+        }
 
 }

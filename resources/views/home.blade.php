@@ -9,9 +9,9 @@
                 Bienvenue sur Lavatar, l'appli qui stocke tes avatars
             </p>
 
-            <a type="button" class="btn btn-lg btn-success" href="{{ url('/login') }}">connexion</a>
+            <a type="button" class="btn btn-lg btn-success" href="{{ url('/login') }}">Se connecter</a>
 
-            <a type="button" class="btn btn-lg btn-default" href="{{ url('/register') }}">register</a>
+            <a type="button" class="btn btn-lg btn-default" href="{{ url('/register') }}">S'enregistrer</a>
         </div>
         <footer class="footer">
             <p>&copy; 2017  larval commpany, Inc.</p>
