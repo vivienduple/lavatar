@@ -3,8 +3,10 @@
 
 Merci de votre inscription sur Lavatar et bienvenue dans la communauté!
 
-@component('mail::button', ['url' => 'http://http://iparla.iutbayonne.univ-pau.fr/~jthebault001/lavatar-2/public/'])
-Button Text
+Si vous n'êtes pas à l'origine de cette action, contactez-nous à contact@lavatar.com.
+
+@component('mail::button', ['url' => url('/')])
+Ouvrir Lavatar
 @endcomponent
 
 Thanks,<br>

@@ -4,7 +4,7 @@
 Bonjour,
 
 Cette adresse mail à été liée à un avatar personnalisé sur notre service (Lavatar), si vous êtes bien à l'origine de
-cette action cliquez sur le bouton ci-dessous pour valider cet avatar, sinon, contactez-nous au 0 800 825 845.
+cette action cliquez sur le bouton ci-dessous pour valider cet avatar, sinon, contactez-nous à contact@lavatar.com.
 
 @component('mail::button', ['url' => url('/').'/valAvatar/'.$id.'/'.$tocken])
 Je valide cet avatar !
