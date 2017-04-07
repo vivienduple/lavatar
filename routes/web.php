@@ -50,5 +50,10 @@ Route::get('/regAvatar')
     ->middleware('auth')
     ->uses('UserController@displayRegistrationAvatarConfirmation');
 
+/* router to possibiity of adding an avatar to a new created account*/
+Route::get('/valAvatar/{id}/{tocken}')
+    ->name('valid.avatar')
+    ->uses('UserController@validAvatar');
+
 
 Auth::routes();

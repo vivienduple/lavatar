@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationMailConf;
+use App\Mail\AvatarValidation;
 use App\User;
 use App\Avatar;
 use Illuminate\Http\Request;
@@ -138,7 +139,10 @@ class UserController extends Controller
                 $avatar->user_id = $userId;
                 $avatar->email = $dataFromForm['email'];
                 $avatar->image = $avatarName;
+                $avatar->validity = time($avatarName);
                 $avatar->save();
+
+                Mail::to($avatar->email)->send(new AvatarValidation($avatar->id, $avatar->validity));
                 
                 //return "je viens de creer un nouvel avatar avec mon formulaire dt le nom de l'image est: ".$avatar->image;
                 // return to the updated user dashboard
@@ -151,7 +155,13 @@ class UserController extends Controller
 
     }
 
+    public function displayRegistrationAvatarConfirmation(Request $request){
 
+        $user = User::find(Auth::id());
+        Mail::to($user->email)->send(new RegistrationMailConf());
+        // return to the updated user dashboard
+        return view('addAvatarImageOnRegistration');
+    }
 
     public function deleteAvatar($id){
         
@@ -170,12 +180,21 @@ class UserController extends Controller
         return redirect()->route('user.dashboard');
     }
 
-    public function displayRegistrationAvatarConfirmation(Request $request){
+    public function validAvatar($id, $tocken){
 
-        $user = User::find(Auth::id());
-        Mail::to($user->email)->send(new RegistrationMailConf());
+
+        // get the Avatar
+        $avatarToConfirm = Avatar::find($id);
+        
+        if($avatarToConfirm->validity != null){
+            if($avatarToConfirm->validity == $tocken){
+                $avatarToConfirm->validity = null;
+            }
+        }
+        $avatarToConfirm->save();
+
         // return to the updated user dashboard
-        return view('addAvatarImageOnRegistration');
+        return redirect()->route('user.dashboard');
     }
 
 }
