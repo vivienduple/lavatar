@@ -7,6 +7,7 @@
  */
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationMailConf;
@@ -166,7 +167,7 @@ class UserController extends Controller
                 // the user is redirected to his own dashboard after its avatar creation
 
                 Mail::to($avatar->email)->send(new AvatarValidation($avatar->id, $avatar->validity));
-                
+
                 //return "je viens de creer un nouvel avatar avec mon formulaire dt le nom de l'image est: ".$avatar->image;
                 // return to the updated user dashboard
                 return redirect()->route('user.dashboard');
@@ -205,15 +206,16 @@ class UserController extends Controller
         // return to the updated user dashboard
         return view('addAvatarImageOnRegistration');
     }
-    
-    public function validAvatar($id, $tocken){
+
+    public function validAvatar($id, $tocken)
+    {
 
 
         // get the Avatar
         $avatarToConfirm = Avatar::find($id);
 
-        if($avatarToConfirm->validity != null){
-            if($avatarToConfirm->validity == $tocken){
+        if ($avatarToConfirm->validity != null) {
+            if ($avatarToConfirm->validity == $tocken) {
                 $avatarToConfirm->validity = null;
             }
         }

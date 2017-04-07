@@ -30,6 +30,11 @@ Route::get('request/avatar/{email}/{size?}')
     ->where('size','[1,2]{1}')
     ->uses('ApiController@provideAvatarInfos');
 
+/* the route to get data about the application */
+Route::get('appData')
+    ->name('api.data')
+    ->uses('ApiController@provideAppData');
+
 
 
 
