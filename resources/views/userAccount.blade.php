@@ -30,8 +30,6 @@
                                     @else
                                         @foreach ($avatars as $avatar)
                                             <div class="list-group">
-                                                <form class="form-horizontal" role="form" method="GET" action="@php echo route('removeAvatar.process', [$avatar->id]) @endphp">
-                                                    {{ csrf_field() }}
                                                 @if($avatar->validity == null)
                                                     <div class="list-group-item default">
                                                 @else
@@ -48,20 +46,18 @@
                                                             @endif
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <button type="submit" class="btn btn-danger pull-right">
+                                                            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('delAvatar').setAttribute('href', '{{ route('removeAvatar.process', ['id' => $avatar->id]) }}')">
                                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </form>
                                             </div>
                                         @endforeach
                                     @endif
                             </div>
                         </div>
                     </div>
-                <div class="panel-footer">LP Multimédia - Benjamin Abadie, Julie Thébaut, Vivien Duplé - Iut de Bayonne et du Pays Basque</div>
             </div>
         </div>
     </div>
