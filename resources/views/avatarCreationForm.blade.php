@@ -11,7 +11,7 @@
                               accept="image/*" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ ($errors->has('email') || (isset($msg) && $msg=='email already used')) ? ' has-error' : '' }}">
+                            <div class="form-group{{ ($errors->has('email') || (isset($msg) && $msg=='email interdit')) ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">{{ __('messages.email') }}</label>
 
                                 <div class="col-md-6">
@@ -29,7 +29,7 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
-                                    @if (isset($msg) && $msg=='an avatar with this email already exists')
+                                    @if (isset($msg) && $msg=='email interdit')
                                         <span class="help-block">
                                         <strong>{{ $msg }}</strong>
                                     </span>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ (isset($msg) && $msg=='invalid format') ? ' has-error' : '' }}">
+                            <div class="form-group{{ (isset($msg) && $msg=='format invalide') ? ' has-error' : '' }}">
                                 <label for="inputFile"
                                        class="col-md-4 control-label">{{ __('messages.youravatarimage') }}</label>
                                 <div class="col-md-6">
@@ -46,7 +46,7 @@
                                     <span id="helpBlock"
                                           class="help-block">Taille mini: 128px / Taille max: 256 px</span>
                                     <span id="helpBlock" class="help-block">Formats image: jpeg, png</span>
-                                    @if (isset($msg) && $msg=='invalid format')
+                                    @if (isset($msg) && $msg=='format invalide')
                                         <span class="help-block">
                                         <strong>{{ $msg }}</strong>
                                     </span>
